@@ -1,0 +1,136 @@
+import java.util.NoSuchElementException;
+import java.util.LinkedList;
+import java.util.ListIterator;
+
+public class NodeList<E> {
+	  // The linked list which is to be adapted
+	  protected LinkedList<E> linkedList = new LinkedList<E>();
+
+	  // Directly available
+	  public int size() {
+	    return linkedList.size();
+	  }
+
+	  // Directly available
+	  public boolean isEmpty() {
+	     return linkedList.isEmpty();
+	  }
+
+	  // fix me!
+	  public boolean isFirst(E element) {
+		  if (size() > 0) {
+			  return (linkedList.element() == element);
+			  }else {
+				  return false;
+			  }
+	  }
+
+	  // fix me!
+	  public boolean isLast(E element) {
+		  if (size()>0) {
+			  return (linkedList.getLast() == element);
+			  }
+		  else {return false;}
+	  }
+
+	  // Directly available
+	  public E first() 
+	    throws NoSuchElementException {
+	    return linkedList.element();
+	  }
+
+
+	  // Directly available
+	  public E last() 
+	    throws NoSuchElementException {
+	    return linkedList.getLast();
+	  }
+
+	  // fix me!
+	  E prev(E element)
+	    throws NoSuchElementException {
+		  return linkedList.get(linkedList.indexOf(element)-1);
+	    // return null;
+	  }
+
+
+	  // fix me!
+	  E next(E element)
+	    throws NoSuchElementException {
+		  for (ListIterator<E> iter = linkedList.listIterator();
+				  iter.hasNext();
+				  )
+		  {
+			  if (iter.next() == element)
+				  return iter.next();
+		  }
+			  
+	    throw new NoSuchElementException();
+	    // return null;
+	  }
+
+	  // fix me!
+	  public void swapElements(E element1, E element2)
+	    throws NoSuchElementException {
+		  int index1 = linkedList.indexOf(element1);
+		  if (index1 == -1) throw new NoSuchElementException();
+		  int index2 = linkedList.indexOf(element2);
+		  if (index2 == -1) throw new NoSuchElementException();
+		  linkedList.set(index1, element2);
+		  linkedList.set(index2, element1);
+	  }
+	  
+
+	  // fix me!
+	  public void set(E currElement, E repElement)
+	    throws NoSuchElementException {
+		  int index = linkedList.indexOf (currElement);
+		  if ( index == -1) throw new NoSuchElementException();
+		  linkedList.set(index, repElement);
+		  return;
+	  }
+
+
+	  // Directly available
+	  public void addFirst(E element) {
+	    linkedList.addFirst(element);
+	    return;
+	  }
+
+	  // Directly available
+	  public void addLast(E element) {
+	    linkedList.addLast(element);
+	    return;
+	  }
+
+	  // fix me!
+	  public void addBefore(E currElement,E addElement)
+	    throws NoSuchElementException {
+		  int index = linkedList.indexOf((currElement));
+		  if (index == -1) throw new NoSuchElementException ();
+		  linkedList.add(index, addElement);
+		  return;
+	  }
+
+	  // fix me!
+	  public void addAfter(E currElement,E addElement) 
+	    throws NoSuchElementException {
+		  int index = linkedList.indexOf(currElement);
+		  if (index == -1 ) throw new NoSuchElementException();
+		  linkedList.add(index+1, addElement);
+		  return;
+	  }
+	  
+	  // fix me!
+	  public E remove(E element) 
+	    throws NoSuchElementException {
+		  for (ListIterator<E> iter = linkedList.listIterator();
+				  iter.hasNext();) {
+			  if (iter.next() == element) {
+				  iter.remove();
+				  return element;
+			  }
+		  }
+	    throw new NoSuchElementException();
+	  }
+}

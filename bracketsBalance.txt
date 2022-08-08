@@ -1,0 +1,54 @@
+
+public class bracketsBalance {
+    private boolean bBalance (String exp){ 
+
+        // INCLUDE YOUR CODE HERE
+    	ArrayStack stk = new ArrayStack(10);
+    	String brackets = "(){}[]"; //brackets kinds accepted
+    	
+    	//to look through expression 
+    	for (int i=0; i < exp.length();i++) {
+    		char ch = exp.charAt(i);
+    		int inputPos = brackets.indexOf(ch);
+    		
+    		if (inputPos%2==0) {
+    			try {
+    				stk.push(new Character(ch));
+    			}
+    			catch(StackFullException  e) {
+    			}
+    		}
+    		else if(inputPos != -1) {
+    			if(stk.isEmpty())
+    				return false;
+    		}
+    			char charFromStack = '\0';
+    			try {
+    				charFromStack = ((Character)stk.pop()).charValue();
+    			}
+    			catch(StackEmptyException e) {
+    			}
+    			
+    			int StackedPos = brackets.indexOf(charFromStack);
+    			if(StackedPos+1 != inputPos)
+    				return false;
+    	}
+    	
+    	return stk.isEmpty();
+    	
+    	
+
+      
+
+    }
+
+    public static void main(String[] args) {
+  
+        bracketsBalance b = new bracketsBalance();
+        boolean result = b.bBalance(args[0]);
+       
+       
+        if (result) System.out.println("The expression is balanced."); 
+        else        System.out.println("The expression is NOT balanced."); 
+    }
+}
